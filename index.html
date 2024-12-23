@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My SPA</title>
+    <style>
+        /* Basic CSS for styling */
+        nav ul {
+            list-style: none;
+            padding: 0;
+        }
+        nav li {
+            display: inline;
+            margin-right: 20px;
+            cursor: pointer; /* Make it look clickable */
+        }
+        #content {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li onclick="showPage('home')">Home</li>
+            <li onclick="showPage('about')">About</li>
+            <li onclick="showPage('contact')">Contact</li>
+        </ul>
+    </nav>
+
+    <div id="content">
+        </div>
+
+    <script>
+        function showPage(page) {
+            let contentDiv = document.getElementById('content');
+            if (page === 'home') {
+                contentDiv.innerHTML = '<h1>Welcome to the Home Page!</h1><p>This is the home content.</p>';
+            } else if (page === 'about') {
+                contentDiv.innerHTML = '<h1>About Us</h1><p>Learn more about our company.</p>';
+            } else if (page === 'contact') {
+                contentDiv.innerHTML = '<h1>Contact Information</h1><p>Get in touch with us.</p>';
+            }
+        }
+
+        // Show the home page by default
+        showPage('home');
+    </script>
+</body>
+</html>
