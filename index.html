@@ -3,46 +3,75 @@
 <head>
     <title>My SPA</title>
     <style>
-        /* Basic CSS for styling */
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        nav {
+            background-color: navy; /* Navy blue background */
+            color: white; /* White text */
+            padding: 10px;
+        }
+
         nav ul {
             list-style: none;
             padding: 0;
+            display: flex;
+            justify-content: center; /* Center the list items */
         }
+
         nav li {
-            display: inline;
-            margin-right: 20px;
-            cursor: pointer; /* Make it look clickable */
+            margin: 0 15px; /* Add space between list items */
+            cursor: pointer;
         }
+
         #content {
-            margin-top: 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
         }
     </style>
 </head>
 <body>
     <nav>
         <ul>
-            <li onclick="showPage('home')">Home</li>
-            <li onclick="showPage('about')">About</li>
-            <li onclick="showPage('contact')">Contact</li>
+            <li data-page="home">Home</li>
+            <li data-page="about">About</li>
+            <li data-page="contact">Contact</li>
         </ul>
     </nav>
 
-    <div id="content">
-        </div>
+    <div id="content"></div>
 
     <script>
+        const contentDiv = document.getElementById('content');
+        const navLinks = document.querySelectorAll('nav li');
+
         function showPage(page) {
-            let contentDiv = document.getElementById('content');
+            let content = '';
             if (page === 'home') {
-                contentDiv.innerHTML = '<h1>Welcome to the Home Page!</h1><p>This is the home content.</p>';
+                content = '<h1>Welcome to the Home Page!</h1><p>This is the home content.</p>';
             } else if (page === 'about') {
-                contentDiv.innerHTML = '<h1>About Us</h1><p>Learn more about our company.</p>';
+                content = '<h1>About Us</h1><p>Learn more about our company.</p>';
             } else if (page === 'contact') {
-                contentDiv.innerHTML = '<h1>Contact Information</h1><p>Get in touch with us.</p>';
+                content = '<h1>Contact Information</h1><p>Get in touch with us.</p>';
             }
+            contentDiv.innerHTML = content;
         }
 
-        // Show the home page by default
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                const page = link.dataset.page;
+                showPage(page);
+            });
+        });
+
         showPage('home');
     </script>
 </body>
