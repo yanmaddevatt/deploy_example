@@ -53,18 +53,16 @@
         const contentDiv = document.getElementById('content');
         const navLinks = document.querySelectorAll('nav li');
 
-        async function showPage(page) {
-            try {
-                const response = await fetch(`${page}.html`); // Fetch the HTML file
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                const html = await response.text(); // Get the HTML content as text
-                contentDiv.innerHTML = html; // Set the content
-            } catch (error) {
-                console.error("Error fetching page:", error);
-                contentDiv.innerHTML = "<p>Error loading page.</p>"; // Display an error message
+        function showPage(page) {
+            let content = '';
+            if (page === 'home') {
+                content = '<h1>Welcome to the Home Page!</h1><p>This is the home content.</p>';
+            } else if (page === 'about') {
+                content = '<h1>About Us</h1><p>Learn more about our company.</p>';
+            } else if (page === 'contact') {
+                content = '<h1>Contact Information</h1><p>Get in touch with us.</p>';
             }
+            contentDiv.innerHTML = content;
         }
 
         navLinks.forEach(link => {
@@ -73,9 +71,6 @@
                 showPage(page);
             });
         });
-
-        showPage('home'); // Load the home page initially
-
 
         showPage('home');
     </script>
